@@ -43,9 +43,7 @@ $pendingMarks    = (int) Database::conn()->query("SELECT COUNT(*) FROM examinati
 $publishedExams  = (int) Database::conn()->query("SELECT COUNT(*) FROM examinations WHERE status='published'")->fetchColumn();
 $avgPerformance  = (float) (Database::conn()->query("SELECT AVG(percentage) FROM marks WHERE percentage IS NOT NULL")->fetchColumn() ?: 0);
 
-// ============================================================
-// Enrollment trend (last 5 academic years)
-// ============================================================
+// Enrollment trend
 $enrollTrend = Database::fetchAll(
     "SELECT ay.name,
             (SELECT COUNT(*) FROM enrollments e WHERE e.academic_year_id = ay.id) AS cnt
@@ -54,9 +52,7 @@ $enrollTrend = Database::fetchAll(
      LIMIT 5"
 );
 
-// ============================================================
 // Performance by grade
-// ============================================================
 $perfByGrade = Database::fetchAll(
     "SELECT g.name, AVG(m.percentage) AS avg_pct
      FROM grades g
@@ -68,9 +64,7 @@ $perfByGrade = Database::fetchAll(
      ORDER BY g.level ASC"
 );
 
-// ============================================================
-// Student distribution by grade
-// ============================================================
+// Student distribution
 $distByGrade = Database::fetchAll(
     "SELECT g.name, COUNT(e.id) AS cnt
      FROM grades g
@@ -79,9 +73,7 @@ $distByGrade = Database::fetchAll(
      ORDER BY g.level ASC"
 );
 
-// ============================================================
-// Recent activity (audit logs)
-// ============================================================
+// Recent activity
 $recentActivity = Database::fetchAll(
     "SELECT a.action, a.entity, a.description, a.created_at, u.full_name
      FROM audit_logs a
@@ -94,7 +86,15 @@ $pageTitle       = 'Admin Dashboard';
 $pageDescription = 'Overview of your school at a glance.';
 $breadcrumbs     = [['label' => 'Dashboard']];
 
-$extraCss = ['assets/css/dashboard.css'];
+// ============================================================
+// MUHIIMAA: Background image fi glass style dashboard kana qofaaf
+// ============================================================
+$bodyClass       = 'dashboard-page';
+$extraCss        = ['assets/css/dashboard.css'];
+$extraJs         = [
+    'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js',
+    'assets/js/dashboard.js',
+];
 
 include __DIR__ . '/../includes/header.php';
 ?>
@@ -200,13 +200,13 @@ include __DIR__ . '/../includes/header.php';
 </div>
 
 <!-- ============================================================
-     Charts row 2 + Activity
+     Charts row 2 + Quick actions
      ============================================================ -->
 <div class="row g-3 mb-3">
     <div class="col-lg-4">
         <div class="card chart-card">
             <div class="card-header">
-                <h6><i class="bi bi-bar-chart-line me-2"></i>Average Performance by Grade</h6>
+                <h6><i class="bi bi-bar-chart-line me-2"></i>Average Performance</h6>
             </div>
             <div class="card-body">
                 <div class="chart-wrap-sm chart-wrap">
@@ -251,10 +251,10 @@ include __DIR__ . '/../includes/header.php';
                         <span class="qa-icon"><i class="bi bi-pencil-square"></i></span> Enter Marks
                     </a>
                     <a class="qa-btn" href="<?= e(url('admin/announcements/create.php')) ?>">
-                        <span class="qa-icon"><i class="bi bi-megaphone"></i></span> New Announcement
+                        <span class="qa-icon"><i class="bi bi-megaphone"></i></span> Announcement
                     </a>
                     <a class="qa-btn" href="<?= e(url('admin/reports/academic.php')) ?>">
-                        <span class="qa-icon"><i class="bi bi-file-earmark-text"></i></span> Generate Report
+                        <span class="qa-icon"><i class="bi bi-file-earmark-text"></i></span> Reports
                     </a>
                 </div>
             </div>
@@ -320,8 +320,4 @@ include __DIR__ . '/../includes/header.php';
     </div>
 </div>
 
-<?php
-// Extra JS for dashboard charts (only on this page)
-$extraJs = ['https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js', 'assets/js/dashboard.js'];
-include __DIR__ . '/../includes/footer.php';
-?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

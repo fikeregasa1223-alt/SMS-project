@@ -1,154 +1,294 @@
 /* ==========================================================================
-   SMS - Dashboard-specific styles
+   SMS — Dashboard (Professional Glass Theme)
    ========================================================================== */
 
-/* Stat cards */
-.dashboard-stats .stat-card {
+/* --------------------------------------------------------------
+   1. Dashboard background — ONLY when body.dashboard-page
+   -------------------------------------------------------------- */
+body.dashboard-page {
+    background-image:
+        linear-gradient(rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.75)),
+        url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2200&q=85') !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-attachment: fixed !important;
+    background-repeat: no-repeat !important;
+    color: #ffffff !important;
+}
+
+/* main content transparent so background shows */
+body.dashboard-page .main,
+body.dashboard-page .page-content,
+body.dashboard-page .app-shell {
+    background: transparent !important;
+}
+
+/* page header */
+body.dashboard-page .page-header h1 {
+    color: #ffffff !important;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+body.dashboard-page .page-header .page-desc {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* header buttons */
+body.dashboard-page .page-actions .btn-primary {
+    background: #ffffff !important;
+    color: #1e1b3c !important;
+    border: none !important;
+    font-weight: 600;
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.18);
+    transition: all 0.2s ease;
+}
+body.dashboard-page .page-actions .btn-primary:hover {
+    background: #f8fafc !important;
+    color: #1e1b3c !important;
+    transform: translateY(-1px);
+}
+body.dashboard-page .page-actions .btn-outline-primary {
+    background: rgba(255, 255, 255, 0.06) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    font-weight: 600;
+}
+body.dashboard-page .page-actions .btn-outline-primary:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* --------------------------------------------------------------
+   2. Glass cards
+   -------------------------------------------------------------- */
+body.dashboard-page .card {
+    background: rgba(30, 27, 60, 0.55) !important;
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 18px;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    color: #ffffff !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+body.dashboard-page .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
+}
+body.dashboard-page .card-header {
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+}
+body.dashboard-page .card-header h6 {
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    margin: 0;
+}
+body.dashboard-page .card-header .text-muted {
+    color: rgba(255, 255, 255, 0.55) !important;
+}
+body.dashboard-page .card-header a.small {
+    color: rgba(255, 255, 255, 0.75) !important;
+    text-decoration: none;
+}
+body.dashboard-page .card-header a.small:hover {
+    color: #ffffff !important;
+    text-decoration: underline;
+}
+
+/* --------------------------------------------------------------
+   3. Stat cards
+   -------------------------------------------------------------- */
+body.dashboard-page .dashboard-stats .stat-card {
+    padding: 1.5rem 1.4rem;
+    display: flex;
+    gap: 1.15rem;
+    align-items: center;
     position: relative;
     overflow: hidden;
 }
-.dashboard-stats .stat-card::after {
+body.dashboard-page .stat-card::after {
     content: "";
     position: absolute;
-    top: -30%; right: -10%;
-    width: 120px; height: 120px;
+    top: -40%;
+    right: -20%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.22) 0%, transparent 70%);
     border-radius: 50%;
-    background: rgba(79,70,229,.05);
     pointer-events: none;
 }
+body.dashboard-page .stat-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+body.dashboard-page .icon-primary { background: rgba(99, 102, 241, 0.22); color: #c7d2fe; }
+body.dashboard-page .icon-info    { background: rgba(6, 182, 212, 0.22); color: #a5f3fc; }
+body.dashboard-page .icon-success { background: rgba(16, 185, 129, 0.22); color: #a7f3d0; }
+body.dashboard-page .icon-warning { background: rgba(245, 158, 11, 0.22); color: #fde68a; }
 
-/* Chart cards */
-.chart-card .card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: .85rem 1.1rem;
+body.dashboard-page .stat-value {
+    color: #ffffff !important;
+    font-size: 1.9rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
 }
-.chart-card .card-header h6 {
-    margin: 0;
+body.dashboard-page .stat-label {
+    color: rgba(255, 255, 255, 0.65) !important;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 2px;
+}
+body.dashboard-page .stat-trend {
+    color: rgba(255, 255, 255, 0.75) !important;
+    font-size: 0.75rem;
     font-weight: 600;
-    font-size: .9rem;
+    margin-top: 6px;
 }
-.chart-wrap {
+body.dashboard-page .stat-trend.trend-up { color: #6ee7b7 !important; }
+body.dashboard-page .stat-trend.trend-down { color: #fca5a5 !important; }
+
+/* --------------------------------------------------------------
+   4. Chart cards
+   -------------------------------------------------------------- */
+body.dashboard-page .chart-wrap {
     position: relative;
     height: 260px;
 }
-.chart-wrap-sm { height: 220px; }
+body.dashboard-page .chart-wrap-sm {
+    height: 220px;
+}
 
-/* Activity feed */
-.activity-feed {
+/* --------------------------------------------------------------
+   5. Quick actions
+   -------------------------------------------------------------- */
+body.dashboard-page .quick-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+}
+body.dashboard-page .qa-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.85rem 0.9rem;
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+body.dashboard-page .qa-btn:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    transform: translateY(-2px);
+    color: #ffffff !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+body.dashboard-page .qa-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: rgba(99, 102, 241, 0.22);
+    color: #c7d2fe;
+    display: grid;
+    place-items: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------
+   6. Text & activity
+   -------------------------------------------------------------- */
+body.dashboard-page .text-soft {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+body.dashboard-page .card-body strong {
+    color: #ffffff !important;
+}
+
+body.dashboard-page .activity-feed {
     list-style: none;
     padding: 0;
     margin: 0;
-    max-height: 360px;
+    max-height: 380px;
     overflow-y: auto;
 }
-.activity-feed li {
+body.dashboard-page .activity-feed li {
     display: flex;
-    gap: .75rem;
-    padding: .75rem 1rem;
-    border-bottom: 1px solid var(--sms-border);
+    gap: 0.85rem;
+    padding: 0.85rem 1.1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
-.activity-feed li:last-child { border-bottom: 0; }
-.activity-feed .af-icon {
-    flex-shrink: 0;
-    width: 34px; height: 34px;
-    border-radius: 8px;
-    display: grid; place-items: center;
-    background: var(--sms-primary-soft);
-    color: var(--sms-primary);
-    font-size: .9rem;
-}
-.activity-feed .af-body { min-width: 0; flex: 1; }
-.activity-feed .af-title {
-    font-weight: 600;
-    font-size: .85rem;
-    color: var(--sms-text);
-    margin: 0 0 2px;
-}
-.activity-feed .af-meta {
-    font-size: .75rem;
-    color: var(--sms-text-muted);
-}
-
-/* Quick actions grid */
-.quick-actions {
+body.dashboard-page .activity-feed li:last-child { border-bottom: 0; }
+body.dashboard-page .af-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: .6rem;
-}
-.quick-actions .qa-btn {
-    display: flex;
-    align-items: center;
-    gap: .6rem;
-    padding: .75rem .85rem;
-    border-radius: 10px;
-    background: var(--sms-surface);
-    border: 1px solid var(--sms-border);
-    color: var(--sms-text);
-    text-decoration: none;
-    font-size: .8125rem;
-    font-weight: 600;
-    transition: all .15s ease;
-}
-.quick-actions .qa-btn:hover {
-    background: var(--sms-primary-soft);
-    border-color: var(--sms-primary);
-    color: var(--sms-primary);
-    transform: translateY(-1px);
-    box-shadow: var(--sms-shadow-sm);
-}
-.quick-actions .qa-icon {
-    width: 32px; height: 32px;
-    border-radius: 8px;
-    background: var(--sms-primary-soft);
-    color: var(--sms-primary);
-    display: grid; place-items: center;
-    font-size: .95rem;
+    place-items: center;
+    background: rgba(99, 102, 241, 0.22);
+    color: #c7d2fe;
+    font-size: 0.95rem;
     flex-shrink: 0;
 }
+body.dashboard-page .af-title {
+    color: #ffffff !important;
+    font-weight: 500;
+    font-size: 0.875rem;
+    margin: 0 0 3px;
+}
+body.dashboard-page .af-meta {
+    color: rgba(255, 255, 255, 0.55) !important;
+    font-size: 0.75rem;
+}
+body.dashboard-page .af-meta i { color: rgba(255, 255, 255, 0.45); }
 
-/* Empty state */
-.empty-state .empty-icon {
-    width: 64px; height: 64px;
-    margin: 0 auto;
-    border-radius: 50%;
-    display: grid; place-items: center;
-    background: var(--sms-primary-soft);
-    color: var(--sms-primary);
-    font-size: 1.6rem;
+body.dashboard-page .activity-feed::-webkit-scrollbar { width: 6px; }
+body.dashboard-page .activity-feed::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
 }
 
-/* Filter bar */
-.filter-bar {
-    background: var(--sms-surface);
-    border: 1px solid var(--sms-border);
-    border-radius: var(--sms-radius);
-    padding: .75rem 1rem;
-    margin-bottom: 1rem;
+/* --------------------------------------------------------------
+   7. Empty state
+   -------------------------------------------------------------- */
+body.dashboard-page .empty-state { color: rgba(255, 255, 255, 0.7); }
+body.dashboard-page .empty-state .empty-icon {
+    background: rgba(99, 102, 241, 0.22);
+    color: #c7d2fe;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
-.filter-bar .form-control,
-.filter-bar .form-select {
-    height: 38px;
-    font-size: .875rem;
-}
+body.dashboard-page .empty-state h5 { color: #ffffff; }
+body.dashboard-page .empty-state .text-muted { color: rgba(255, 255, 255, 0.55) !important; }
 
-/* Table pagination in footer */
-.table-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: .85rem 1rem;
-    border-top: 1px solid var(--sms-border);
-    background: var(--sms-surface);
-    font-size: .8125rem;
-    color: var(--sms-text-muted);
-    flex-wrap: wrap;
+/* --------------------------------------------------------------
+   8. Responsive
+   -------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+    body.dashboard-page .chart-wrap { height: 230px; }
+    body.dashboard-page .chart-wrap-sm { height: 200px; }
 }
-
-/* Mobile */
 @media (max-width: 575.98px) {
-    .quick-actions { grid-template-columns: 1fr; }
-    .chart-wrap { height: 220px; }
+    body.dashboard-page .page-content { padding: 1rem; }
+    body.dashboard-page .quick-actions { grid-template-columns: 1fr; }
+    body.dashboard-page .stat-value { font-size: 1.6rem; }
+    body.dashboard-page .stat-icon { width: 48px; height: 48px; font-size: 1.25rem; }
+    body.dashboard-page .chart-wrap { height: 200px; }
 }
